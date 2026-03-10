@@ -1,21 +1,23 @@
 local function run_slidey()
-	if vim.fn.executable("slidey") ~= 1 then
-		vim.notify("slidey not installed!", vim.log.levels.ERROR)
+	if vim.fn.executable("slidey") == 0 then
+		vim.notify("Slidey not installed!", vim.log.levels.ERROR)
 		return
 	end
+
 	local file = vim.api.nvim_buf_get_name(0)
 	if file == "" or vim.fn.filereadable(file) == 0 then
-		vim.notify("slidey: not a readable file", vim.log.levels.ERROR)
+		vim.notify("Slidey: not a readable file", vim.log.levels.ERROR)
 		return
 	end
 	if vim.bo.filetype ~= "markdown" then
-		vim.notify("slidey: not a markdown file", vim.log.levels.ERROR)
+		vim.notify("Slidey: not a markdown file", vim.log.levels.ERROR)
 		return
 	end
 
 	vim.cmd("tabnew")
 	local buf = vim.api.nvim_get_current_buf()
-	vim.fn.termopen({ "slidey", file }, {
+	vim.fn.jobstart({ "slidey", file }, {
+		term = true,
 		on_exit = function()
 			vim.cmd("tabclose")
 		end,

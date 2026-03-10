@@ -4,7 +4,13 @@ Neovim plugin for [Slidey](https://github.com/ochcaroline/slidey) - a terminal p
 
 ## Why?
 
-This is just to run slidey in a tab in Neovim. This is just to run a current file with Slidey.
+This is just to run current file (current buffer) in Slidey.
+
+Checks:
+
+- if Slidey is installed and in PATH
+- if file is readable
+- if file is Markdown
 
 ## How?
 
